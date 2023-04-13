@@ -4,16 +4,16 @@ import './App.css';
 //simple header with 66% width design
 const MainBody = () => {
   return (
-    <main className='bg-slate-200 h-screen w-1/2 flex flex-col m-auto'>
-      <div className="bg-slate-400 w-full z-2 py-2 max-h-60 text-center 
+    <main className='bg-slate-200/90 h-screen w-1/2 flex flex-col m-auto'>
+      <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
       text-4xl">
         Quick Music Theory Reference
       </div>
       <div className="flex-grow flex ml-16 mt-16">
-        <div className="flex flex-col h-10 space-y-4">
+        <div className="flex flex-col  h-10 space-y-4">
           <h1 className="mb-10 block">Choose from the drop downs and get a list of results that match!</h1>
           <select required name="c-sel" className="bg-white w-52
-           text-black py-2 px-4 rounded-lg"
+           text-black py-2 px-4 rounded-lg z-2"
             id='concept_select'>
             <option selected value="concept_select">Pick a theory concept</option>
             <option value="chords">chords</option>
@@ -34,14 +34,10 @@ const MainBody = () => {
     </main>
   );
 };
-namespace Calculations {
-  class InputGathering {
-
-  }
-}
 
 const Calculator = () => {
-  //retrieves value from above
+  //retrieves value from above and fills in output area
+  //super simple, literally just a ul dump
 }
 function App() {
   return (
