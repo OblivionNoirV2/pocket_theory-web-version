@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import * as calculator from './calculate';
+
 //simple header with 66% width design
 const MainBody = () => {
   return (
@@ -9,24 +9,39 @@ const MainBody = () => {
       text-4xl">
         Quick Music Theory Reference
       </div>
-      <div className="flex-grow flex justify-center items-center">
-        <div className="flex space-x-4">
-          <select className="bg-white text-black py-2 px-4 rounded">
-            <option value="1">1</option>
-            <option value="2">2</option>
+      <div className="flex-grow flex ml-16 mt-16">
+        <div className="flex flex-col h-10 space-y-4">
+          <h1 className="mb-10 block">Choose from the drop downs and get a list of results that match!</h1>
+          <select required name="c-sel" className="bg-white w-52
+           text-black py-2 px-4 rounded-lg"
+            id='concept_select'>
+            <option selected value="concept_select">Pick a theory concept</option>
+            <option value="chords">chords</option>
+            <option value="scales">scales</option>
+            <option value="intervals">intervals</option>
           </select>
-          <select className="bg-white text-black py-2 px-4 rounded">
-            <option value="1">1</option>
-            <option value="2">2</option>
+          <select required className="bg-white w-60 text-black py-2 px-4 
+          rounded-lg"
+            id='emotion_select'>
+            <option selected value="sound_select">What should it sound like?</option>
+            <option value="major">major</option>
+            <option value="minor">minor</option>
+            <option value="dissonant">dissonant</option>
+            <option value="other">other</option>
           </select>
         </div>
       </div>
     </main>
   );
 };
+namespace Calculations {
+  class InputGathering {
+
+  }
+}
 
 const Calculator = () => {
-  //calls from the other file
+  //retrieves value from above
 }
 function App() {
   return (
