@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 
 //simple header with 66% width design
@@ -31,13 +31,27 @@ const MainBody = () => {
           </select>
         </div>
       </div>
+      <section>
+        <ResultsArea />
+      </section>
     </main>
   );
 };
-
-const Calculator = () => {
-  //retrieves value from above and fills in output area
-  //super simple, literally just a ul dump
+const ResultsArea = () => {
+  return (
+    <div>
+      {/*results go here*/}
+      <Calculator />
+    </div>
+  );
+}
+function Calculator() {
+  //retrieves value from above and matches with hash table
+  return (
+    <div>
+      test
+    </div>
+  );
 }
 function App() {
   return (
