@@ -10,10 +10,11 @@ const MainBody = () => {
         Quick Music Theory Reference
       </div>
       <div className="flex-grow flex ml-16 mt-16">
-        <div className="flex flex-col  h-10 space-y-4">
-          <h1 className="mb-10 block">Choose from the drop downs and get a list of results that match!</h1>
+        <div className=" space-y-4">
+          <h1>Choose from the drop downs and
+            get a list of results that match!</h1>
           <select required name="c-sel" className="bg-white w-52
-           text-black py-2 px-4 rounded-lg z-2"
+           text-black py-2 px-4 rounded-lg z-2 "
             id='concept_select'>
             <option selected value="concept_select">Pick a theory concept</option>
             <option value="chords">chords</option>
@@ -29,17 +30,16 @@ const MainBody = () => {
             <option value="dissonant">dissonant</option>
             <option value="other">other</option>
           </select>
+          <ResultsArea />
         </div>
       </div>
-      <section>
-        <ResultsArea />
-      </section>
     </main>
   );
 };
 const ResultsArea = () => {
   return (
-    <div>
+    <div className='ml-10 inline-block max-w-sm max-h-2xl bg-white 
+    border-4 border-black/90 rounded-lg '>
       {/*results go here*/}
       <Calculator />
     </div>
@@ -49,7 +49,9 @@ function Calculator() {
   //retrieves value from above and matches with hash table
   return (
     <div>
-      test
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+      Quo provident aut impedit excepturi nulla placeat sed totam
+      incidunt sint veniam voluptate voluptas, libero, ducimus illo possimus! Et consequatur ab eligendi?
     </div>
   );
 }
