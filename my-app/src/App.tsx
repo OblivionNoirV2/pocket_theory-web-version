@@ -30,13 +30,15 @@ const MainBody = () => {
             <option value="dissonant">dissonant</option>
             <option value="other">other</option>
           </select>
-          <button className='block'>Submit</button>
+          <button className='block hover:bg-white px-2 py-1 rounded-md'
+          >Submit</button>
         </div>
         <ResultsArea />
       </div>
     </main>
   );
 };
+
 const ResultsArea = () => {
   return (
     <div className=''>
@@ -161,20 +163,39 @@ const AutoResizingTextArea: React.FC<AutoResizingTextAreaProps> = ({ value, clas
 };
 function Calculator() {
   //retrieves value from above and matches with hash table
-  const text = 'Lorem vipsum dolor sit amet consectetur adipisicing elit. Voluptas corrupti dolorem quas nihil illum mollitia consequuntur, repudiandae animi repellendus, eos sunt ad omnis id aliquid odio unde voluptatibus. Exercitationem, sequi?';
-
+  /*const concept_select = document.getElementById('concept_select') as HTMLSelectElement;
+  const emotion_select = document.getElementById('emotion_select') as HTMLSelectElement;
+  const concept = concept_select.value;
+  const emotion = emotion_select.value;
+  let text = "test";
+  if (concept === 'concept_select' || emotion === 'sound_select') {
+    alert('Please select a concept and a sound!');
+  }
+  else {
+    console.log(concept + ' ' + emotion);
+    //pull from the map and display the results
+    switch (concept) {
+      case 'chords':
+        //console.log(chords_map.get(emotion));
+        break;
+      case 'scales':
+        break;
+      case 'intervals':
+        break;
+    }
+  }*/
   return (
     <AutoResizingTextArea
-      value={text}
+      value={"test"}
       placeholder="Output will be here..."
       className="max-w-lg pb-3 ml-12 mr-auto h-auto bg-white border-4 border-black/90 rounded-lg"
     />
   );
-}
+};
 function App() {
   return (
     <MainBody />
   );
-}
+};
 
 export default App;
