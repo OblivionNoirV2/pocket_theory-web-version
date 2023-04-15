@@ -46,7 +46,7 @@ const ResultsArea = () => {
   );
 }
 type result_maps = string | string[];
-
+//chords
 const diss_chords_array: string[] = [
   "Diminished: Any chord that usually is not dissonant, with a flattened note to make it so.Tense and unstable.\nExample: C D# F#(a C minor with the 5th flattened)",
   "Augmented: Any chord that usually is not dissonant, with a raised note to make it so.Tense and unstable.\nExample: C E G#(a C major with the 5th raised)"
@@ -66,11 +66,70 @@ const chords_map: Map<string, result_maps> = new Map<string, result_maps>([
   ["dissonant", diss_chords_array],
   ["other", other_chords_array],
 ]);
-const scales_map = new Map([
 
+//scales 
+const major_scales_array: string[] = [
+  "\nMajor(Ionian): A simple, happy sounding scale.\nFormula: whole, whole, half, whole, whole, whole, half Example: C D E F G A B",
+  "\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\n Formula: whole, whole, whole, half, whole, whole, half Example: C D E F# G A B"
+];
+const minor_scales_array: string[] = [
+  "\nMinor(Aeolian): A scale that tends to sound sad and dark. Very versatile.\nFormula: whole, half, whole, whole, half, whole Example: C D D# F G G# A#",
+  "\nMelodic Minor: A slightly brighter minor scale with the unique quality of sometimes having a different formula ascending and descending. The choice is up to you.\nFormula, ascending: whole, half, whole, whole, whole, whole\nFormula, descending(same as Aeolian): whole, half, whole, whole, half, whole\nExample: C D D# F G A B / A# G# G F D# D C", "\nHarmonic Minor: The Aeolian scale with a raised 7th, which creates a slight sense of darkness and unease.Very Classical sound.\nFormula: whole, half, whole, whole, half, whole + half Example: C D D# F G G# B", "\nPhrygian: Not to be confused with the Phrygian Dominant. Has a very dark, epic quality to it.\nFormula: half, whole, whole, whole, half, whole Example: C C# D# F G G# A#"
+];
+const diss_scales_array: string[] = [
+  "\nLocrian: A tense, very dark scale that can sound unstable or scary.\nFormula: half, whole, whole, half, whole, whole\nExample: C C# D# F F# G# A#",
+  "\nSuper Locrian(Altered Scale): A more extreme version of Locrian.Very tense and unstable.\nFormula: half, whole, half, whole, whole, whole\nExample: C C# D# E F# G# A#",
+  "\nChromatic: The opposite of a scale, pretty much.Any order of notes. Usually extremely dissonant and unpleasant, more often used in unison with an existing scale."
+];
+const other_scales_array: string[] = [
+  "\nDorian: A unique, hard to describe scale that is often said to sound medieval and folk-ish.\nFormula: whole, half, whole, whole, whole, half\nExample: C D D# F G A A#", "\nMixolydian: The Ionian scale with a flattened 7th, and a very common scale in blues and jazz.\nFormula: whole, whole, half, whole, whole, half\nExample: C D E F G A A#",
+  "\nWhole Tone: A unique, dreamy, etherial sounding scale with 6 notes instead of 7.\nFormula: whole, whole, whole, whole, whole\nExample: C D E F# G# A#",
+  "\nHirajoshi: A 5 note scale that sounds very orential or Japanese.\nFormula: whole, half, whole + whole, half\nExample: C D D# G G#"
+];
+const scales_map: Map<string, result_maps> = new Map<string, result_maps>([
+  ["major", major_scales_array],
+  ["minor", minor_scales_array],
+  ["dissonant", diss_scales_array],
+  ["other", other_scales_array],
 ]);
-const intervals_map = new Map([
 
+//intervals
+const major_intervals_array: string[] = [
+  "\nMajor 2nd: 2 semitones",
+  "\nMajor 3rd: 4 semitones",
+  "\nMajor 6th: 9 semitones",
+  "\nMajor 7th: 11 semitones"
+];
+const minor_intervals_array: string[] = [
+  "\nMinor 2nd: 1 semitone",
+  "\nMinor 3rd: 3 semitones",
+  "\nMinor 6th: 8 semitones",
+  "\nMinor 7th: 10 semitones"
+];
+const diss_intervals_array: string[] = [
+  "\nAug 2nd: 3 semitones",
+  "\nAug 3rd: 5 semitones",
+  "\nAug 4th: 6 semitones",
+  "\nAug 5th: 8 semitones",
+  "\nAug 6th: 10 semitones",
+  "\nAug 7th: 12 semitones",
+  "\nDim 2nd: 1 semitone",
+  "\nDim 3rd: 2 semitones",
+  "\nDim 4th: 4 semitones",
+  "\nDim 5th: 6 semitones",
+  "\nDim 6th: 7 semitones",
+  "\nDim 7th: 9 semitones"
+];
+const other_intervals_array: string[] = [
+  "\nerfect 4th: 5 semitones",
+  "\nPerfect 5th: 7 semitones",
+  "\nOctave: 12 semitones"
+];
+const intervals_map = new Map([
+  ["major", major_intervals_array],
+  ["minor", minor_intervals_array],
+  ["dissonant", diss_intervals_array],
+  ["other", other_intervals_array],
 ]);
 function Calculator() {
   //retrieves value from above and matches with hash table
