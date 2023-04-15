@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useRef, useState, useEffect, Fragment } from 'react';
 import './App.css';
 
 //simple header with 66% width design
@@ -30,16 +30,16 @@ const MainBody = () => {
             <option value="dissonant">dissonant</option>
             <option value="other">other</option>
           </select>
-          <ResultsArea />
+          <button className='block'>Submit</button>
         </div>
+        <ResultsArea />
       </div>
     </main>
   );
 };
 const ResultsArea = () => {
   return (
-    <div className='ml-10 inline-block max-w-sm max-h-2xl bg-white 
-    border-4 border-black/90 rounded-lg '>
+    <div className=''>
       {/*results go here*/}
       <Calculator />
     </div>
@@ -79,7 +79,7 @@ const minor_scales_array: string[] = [
 const diss_scales_array: string[] = [
   "\nLocrian: A tense, very dark scale that can sound unstable or scary.\nFormula: half, whole, whole, half, whole, whole\nExample: C C# D# F F# G# A#",
   "\nSuper Locrian(Altered Scale): A more extreme version of Locrian.Very tense and unstable.\nFormula: half, whole, half, whole, whole, whole\nExample: C C# D# E F# G# A#",
-  "\nChromatic: The opposite of a scale, pretty much.Any order of notes. Usually extremely dissonant and unpleasant, more often used in unison with an existing scale."
+  "\nChromatic: The opposite of a scale, pretty much. Any order of notes. Usually extremely dissonant and unpleasant, more often used in unison with an existing scale."
 ];
 const other_scales_array: string[] = [
   "\nDorian: A unique, hard to describe scale that is often said to sound medieval and folk-ish.\nFormula: whole, half, whole, whole, whole, half\nExample: C D D# F G A A#", "\nMixolydian: The Ionian scale with a flattened 7th, and a very common scale in blues and jazz.\nFormula: whole, whole, half, whole, whole, half\nExample: C D E F G A A#",
@@ -131,14 +131,44 @@ const intervals_map = new Map([
   ["dissonant", diss_intervals_array],
   ["other", other_intervals_array],
 ]);
+//hell
+interface AutoResizingTextAreaProps {
+  value: string;
+  className: string;
+  placeholder: string;
+}
+
+const AutoResizingTextArea: React.FC<AutoResizingTextAreaProps> = ({ value, className, placeholder }) => {
+  const text_area_ref = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (text_area_ref.current) {
+      text_area_ref.current.style.height = 'auto';
+      text_area_ref.current.style.height = text_area_ref.current.scrollHeight + 'px';
+    }
+  }, [value]);
+
+  return (
+    <textarea
+      ref={text_area_ref}
+      value={value}
+      disabled
+      placeholder={placeholder}
+      className={`${className} overflow-hidden`}
+      onChange={() => { }}
+    />
+  );
+};
 function Calculator() {
   //retrieves value from above and matches with hash table
+  const text = 'Lorem vipsum dolor sit amet consectetur adipisicing elit. Voluptas corrupti dolorem quas nihil illum mollitia consequuntur, repudiandae animi repellendus, eos sunt ad omnis id aliquid odio unde voluptatibus. Exercitationem, sequi?';
+
   return (
-    <div>
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-      Quo provident aut impedit excepturi nulla placeat sed totam
-      incidunt sint veniam voluptate voluptas, libero, ducimus illo possimus! Et consequatur ab eligendi?
-    </div>
+    <AutoResizingTextArea
+      value={text}
+      placeholder="Output will be here..."
+      className="max-w-lg pb-3 ml-12 mr-auto h-auto bg-white border-4 border-black/90 rounded-lg"
+    />
   );
 }
 function App() {
