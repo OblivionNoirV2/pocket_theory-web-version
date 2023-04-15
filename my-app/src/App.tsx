@@ -45,6 +45,33 @@ const ResultsArea = () => {
     </div>
   );
 }
+type result_maps = string | string[];
+
+const diss_chords_array: string[] = [
+  "Diminished: Any chord that usually is not dissonant, with a flattened note to make it so.Tense and unstable.\nExample: C D# F#(a C minor with the 5th flattened)",
+  "Augmented: Any chord that usually is not dissonant, with a raised note to make it so.Tense and unstable.\nExample: C E G#(a C major with the 5th raised)"
+];
+const other_chords_array: string[] = [
+  "\nPower chords: Two note chords with a neutral, but powerful sound.\nFormula: root, perfect 5th\nExample: C G",
+  "\nsus2: Etherial, 'suspended' sound. There is generally not much distinction between sus2 and sus4.\nFormula: root, second note of major scale, perfect fifth\nExample: C D G",
+  "\nsus4: Etherial, 'suspended' sound. There is generally not much distinction between sus2 and sus4.\nFormula: root, fourth note of major scale, perfect fifth\nExample: C F G",
+  "\noctave: Chords containing 2 of the same note, often the root, at different octaves. Simple way to create a huge, epic sound.",
+  "\n7ths and beyond: Any chord can have additional notes of the scale added in to create a larger sound. To do this, skip the next note in the scale and add the one after that. For example, a minor triad, C D# G, can have the C minor scale's A# added in to create a C minor 7th, C D# G A#. Doing this again would create a 9th, and so on.",
+  "\nInversions: Notes in a chord do not follow a strict order. Change it up and experiment with different sounds! For example, C major can be played as C E G, E G C, G C E, or even E E G C to create variations on the same base sound."
+];
+
+const chords_map: Map<string, result_maps> = new Map<string, result_maps>([
+  ["major", "\nMajor Triad: The most basic major chord.\nFormula: root, major 3rd, perfect 5th\nExample: C E G"],
+  ["minor", "\nMinor Triad: The most basic minor chord.\nFormula: root, minor 3rd, perfect 5th\nExample: C D# G"],
+  ["dissonant", diss_chords_array],
+  ["other", other_chords_array],
+]);
+const scales_map = new Map([
+
+]);
+const intervals_map = new Map([
+
+]);
 function Calculator() {
   //retrieves value from above and matches with hash table
   return (
