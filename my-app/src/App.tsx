@@ -33,20 +33,12 @@ const MainBody = () => {
           <button className='block hover:bg-white px-2 py-1 rounded-md'
           >Submit</button>
         </div>
-        <ResultsArea />
+        <Calculator />
       </div>
     </main>
   );
 };
 
-const ResultsArea = () => {
-  return (
-    <div className=''>
-      {/*results go here*/}
-      <Calculator />
-    </div>
-  );
-}
 type result_maps = string | string[];
 //chords
 const diss_chords_array: string[] = [
@@ -159,7 +151,7 @@ function Calculator() {
     }
   }*/
   return (
-    <div className="max-w-lg pb-3 ml-12 mr-auto h-auto bg-white border-4 border-black/90 rounded-lg">
+    <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
       Output will be here...
     </div>
   );
