@@ -3,6 +3,7 @@ import './App.css';
 
 //simple header with 66% width design
 const MainBody = () => {
+  const [btn, showBtn] = useState(false);
   return (
     <main className='bg-slate-200/90 h-screen w-1/2 flex flex-col m-auto'>
       <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
@@ -31,9 +32,15 @@ const MainBody = () => {
             <option value="other">other</option>
           </select>
           <button className='block hover:bg-white px-2 py-1 rounded-md'
-          >Submit</button>
+            onClick={() => showBtn(true)}>Submit</button>
         </div>
-        <Calculator />
+        {/*when button is clicked, swap this out for the calculation*/}
+        {btn ? <Calculator /> :
+          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+            Output will be here...
+          </div>
+        }
+
       </div>
     </main>
   );
@@ -129,7 +136,7 @@ const intervals_map = new Map([
 
 function Calculator() {
   //retrieves value from above and matches with hash table
-  /*const concept_select = document.getElementById('concept_select') as HTMLSelectElement;
+  const concept_select = document.getElementById('concept_select') as HTMLSelectElement;
   const emotion_select = document.getElementById('emotion_select') as HTMLSelectElement;
   const concept = concept_select.value;
   const emotion = emotion_select.value;
@@ -149,10 +156,10 @@ function Calculator() {
       case 'intervals':
         break;
     }
-  }*/
+  }
   return (
     <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
-      Output will be here...
+      testing
     </div>
   );
 };
