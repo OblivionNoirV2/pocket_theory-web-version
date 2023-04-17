@@ -5,14 +5,14 @@ import './App.css';
 const MainBody = () => {
   const [calc, showCalc] = useState(false);
   const [isFirstTime, setIsFirstTime] = useState(true);
-  const handleClick = () => {
+  const handleChange = () => {
     //needs to ONLY show the default the first time 
     //After that, just update the calculation
     showCalc(!calc);
     setIsFirstTime(false);
   };
-  const [concept, setConcept] = useState("");
-  const [emotion, setEmotion] = useState("");
+  const [concept, setConcept] = useState("concept_select");
+  const [emotion, setEmotion] = useState("sound_select");
   return (
     <main className='bg-slate-200/90 h-screen w-1/2 flex flex-col m-auto'>
       <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
@@ -27,7 +27,12 @@ const MainBody = () => {
             required
             name="c-sel"
             value={concept}
-            onChange={(e) => setConcept(e.target.value)}
+            onChange={(e) => {
+              handleChange();
+              setConcept(e.target.value)
+            }
+            }
+
             className="bg-white w-52 text-black py-2 px-4 rounded-lg 
             z-2"
             id='concept_select'>
@@ -41,7 +46,11 @@ const MainBody = () => {
             required
             name="e-sel"
             value={emotion}
-            onChange={(e) => setEmotion(e.target.value)}
+            onChange={(e) => {
+              handleChange();
+              setEmotion(e.target.value)
+            }
+            }
             className="bg-white w-60 text-black py-2 px-4 
             rounded-lg"
             id='emotion_select'>
@@ -52,17 +61,13 @@ const MainBody = () => {
             <option value="other">other</option>
           </select>
 
-          <button className='block hover:bg-white px-2 py-1 rounded-md'
-            onClick={handleClick}>Submit</button>
         </div>
         {/*when button is clicked, swap this out for the calculation*/}
-        {calc ? <Calculator concept={concept} emotion={emotion} /> :
+        {calc ? <Calculator concept={concept} emotion={emotion} onInvalidSelection={() => alert('Please select a concept and a sound!')} /> :
           (isFirstTime ?
-            <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
-              Output will be here...
-            </div>
+            <Default />
             :
-            <Calculator concept={concept} emotion={emotion} />
+            <Calculator concept={concept} emotion={emotion} onInvalidSelection={() => alert('Please select a concept and a sound!')} />
           )
         }
       </div>
@@ -156,15 +161,26 @@ const intervals_map = new Map([
   ["dissonant", diss_intervals_array],
   ["other", other_intervals_array],
 ]);
-//hell
+const Default = () => {
+  return (
+    <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+      Output will be here...
+    </div>
+  );
+};
 interface CalculatorProps {
   concept: string;
   emotion: string;
+  //to prevent updates every time it changes
+  onInvalidSelection: () => void;
 }
 const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
   //retrieves value from above and matches with hash table
-  if (concept === 'concept_select' || emotion === 'sound_select') {
-    alert('Please select a concept and a sound!');
+  if (concept === "concept_select" || emotion === "sound_select") {
+    //alert('Please select a concept and a sound!');
+    return (
+      <Default />
+    );
   }
   else {
     console.log(concept + ' ' + emotion);
@@ -191,7 +207,9 @@ const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
         );
     }
   }
-  return null;
+  return (
+    <Default />
+  );
 };
 function App() {
   return (
