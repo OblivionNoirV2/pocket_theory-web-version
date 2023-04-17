@@ -35,7 +35,7 @@ const MainBody = () => {
             className="bg-white w-52 text-black py-2 px-4 rounded-lg 
             z-2"
             id='concept_select'>
-            <option selected value="concept_select">Pick a theory concept</option>
+            <option defaultValue="concept_select">Pick a theory concept</option>
             <option value="chords">chords</option>
             <option value="scales">scales</option>
             <option value="intervals">intervals</option>
@@ -53,7 +53,7 @@ const MainBody = () => {
             className="bg-white w-60 text-black py-2 px-4 
             rounded-lg"
             id='emotion_select'>
-            <option selected value="sound_select">What should it sound like?</option>
+            <option defaultValue="sound_select">What should it sound like?</option>
             <option value="major">major</option>
             <option value="minor">minor</option>
             <option value="dissonant">dissonant</option>
@@ -62,11 +62,11 @@ const MainBody = () => {
 
         </div>
         {/*when button is clicked, swap this out for the calculation*/}
-        {calc ? <Calculator concept={concept} emotion={emotion} onInvalidSelection={() => alert('Please select a concept and a sound!')} /> :
+        {calc ? <Calculator concept={concept} emotion={emotion} /> :
           (isFirstTime ?
             <Default />
             :
-            <Calculator concept={concept} emotion={emotion} onInvalidSelection={() => alert('Please select a concept and a sound!')} />
+            <Calculator concept={concept} emotion={emotion} />
           )
         }
       </div>
@@ -78,15 +78,15 @@ type result_maps = string | string[];
 //chords
 const diss_chords_array: string[] = [
   "\nDiminished: Any chord that usually is not dissonant, with a flattened note to make it so. Tense and unstable.\nExample: C D# F#(a C minor with the 5th flattened)",
-  "\nAugmented: Any chord that usually is not dissonant, with a raised note to make it so. Tense and unstable.\nExample: C E G#(a C major with the 5th raised)"
+  "\n\nAugmented: Any chord that usually is not dissonant, with a raised note to make it so. Tense and unstable.\nExample: C E G#(a C major with the 5th raised)"
 ];
 const other_chords_array: string[] = [
   "\nPower chords: Two note chords with a neutral, but powerful sound.\nFormula: root, perfect 5th\nExample: C G",
-  "\nsus2: Etherial, 'suspended' sound. There is generally not much distinction between sus2 and sus4.\nFormula: root, second note of major scale, perfect fifth\nExample: C D G",
-  "\nsus4: Etherial, 'suspended' sound. There is generally not much distinction between sus2 and sus4.\nFormula: root, fourth note of major scale, perfect fifth\nExample: C F G",
-  "\noctave: Chords containing 2 of the same note, often the root, at different octaves. Simple way to create a huge, epic sound.",
-  "\n7ths and beyond: Any chord can have additional notes of the scale added in to create a larger sound. To do this, skip the next note in the scale and add the one after that. For example, a minor triad, C D# G, can have the C minor scale's A# added in to create a C minor 7th, C D# G A#. Doing this again would create a 9th, and so on.",
-  "\nInversions: Notes in a chord do not follow a strict order. Change it up and experiment with different sounds! For example, C major can be played as C E G, E G C, G C E, or even E E G C to create variations on the same base sound."
+  "\n\nsus2: Etherial, 'suspended' sound. There is generally not much distinction between sus2 and sus4.\nFormula: root, second note of major scale, perfect fifth\nExample: C D G",
+  "\n\nsus4: Etherial, 'suspended' sound. There is generally not much distinction between sus2 and sus4.\nFormula: root, fourth note of major scale, perfect fifth\nExample: C F G",
+  "\n\noctave: Chords containing 2 of the same note, often the root, at different octaves. Simple way to create a huge, epic sound.",
+  "\n\n7ths and beyond: Any chord can have additional notes of the scale added in to create a larger sound. To do this, skip the next note in the scale and add the one after that. For example, a minor triad, C D# G, can have the C minor scale's A# added in to create a C minor 7th, C D# G A#. Doing this again would create a 9th, and so on.",
+  "\n\nInversions: Notes in a chord do not follow a strict order. Change it up and experiment with different sounds! For example, C major can be played as C E G, E G C, G C E, or even E E G C to create variations on the same base sound."
 ];
 
 const chords_map: Map<string, result_maps> = new Map<string, result_maps>([
@@ -99,21 +99,23 @@ const chords_map: Map<string, result_maps> = new Map<string, result_maps>([
 //scales 
 const major_scales_array: string[] = [
   "\nMajor(Ionian): A simple, happy sounding scale.\nFormula: whole, whole, half, whole, whole, whole, half Example: C D E F G A B",
-  "\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\nFormula: whole, whole, whole, half, whole, whole, half Example: C D E F# G A B"
+  "\n\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\nFormula: whole, whole, whole, half, whole, whole, half Example: C D E F# G A B"
 ];
 const minor_scales_array: string[] = [
   "\nMinor(Aeolian): A scale that tends to sound sad and dark. Very versatile.\nFormula: whole, half, whole, whole, half, whole Example: C D D# F G G# A#",
-  "\nMelodic Minor: A slightly brighter minor scale with the unique quality of sometimes having a different formula ascending and descending. The choice is up to you.\nFormula, ascending: whole, half, whole, whole, whole, whole\nFormula, descending(same as Aeolian): whole, half, whole, whole, half, whole\nExample: C D D# F G A B / A# G# G F D# D C", "\nHarmonic Minor: The Aeolian scale with a raised 7th, which creates a slight sense of darkness and unease.Very Classical sound.\nFormula: whole, half, whole, whole, half, whole + half Example: C D D# F G G# B", "\nPhrygian: Not to be confused with the Phrygian Dominant. Has a very dark, epic quality to it.\nFormula: half, whole, whole, whole, half, whole Example: C C# D# F G G# A#"
+  "\n\nMelodic Minor: A slightly brighter minor scale with the unique quality of sometimes having a different formula ascending and descending. The choice is up to you.\nFormula, ascending: whole, half, whole, whole, whole, whole\nFormula, descending(same as Aeolian): whole, half, whole, whole, half, whole\nExample: C D D# F G A B / A# G# G F D# D C",
+  "\n\nHarmonic Minor: The Aeolian scale with a raised 7th, which creates a slight sense of darkness and unease.Very Classical sound.\nFormula: whole, half, whole, whole, half, whole + half Example: C D D# F G G# B",
+  "\n\nPhrygian: Not to be confused with the Phrygian Dominant. Has a very dark, epic quality to it.\nFormula: half, whole, whole, whole, half, whole Example: C C# D# F G G# A#"
 ];
 const diss_scales_array: string[] = [
   "\nLocrian: A tense, very dark scale that can sound unstable or scary.\nFormula: half, whole, whole, half, whole, whole\nExample: C C# D# F F# G# A#",
-  "\nSuper Locrian(Altered Scale): A more extreme version of Locrian.Very tense and unstable.\nFormula: half, whole, half, whole, whole, whole\nExample: C C# D# E F# G# A#",
-  "\nChromatic: The opposite of a scale, pretty much. Any order of notes. Usually extremely dissonant and unpleasant, more often used in unison with an existing scale."
+  "\n\nSuper Locrian(Altered Scale): A more extreme version of Locrian.Very tense and unstable.\nFormula: half, whole, half, whole, whole, whole\nExample: C C# D# E F# G# A#",
+  "\n\nChromatic: The opposite of a scale, pretty much. Any order of notes. Usually extremely dissonant and unpleasant, more often used in unison with an existing scale."
 ];
 const other_scales_array: string[] = [
   "\nDorian: A unique, hard to describe scale that is often said to sound medieval and folk-ish.\nFormula: whole, half, whole, whole, whole, half\nExample: C D D# F G A A#", "\nMixolydian: The Ionian scale with a flattened 7th, and a very common scale in blues and jazz.\nFormula: whole, whole, half, whole, whole, half\nExample: C D E F G A A#",
-  "\nWhole Tone: A unique, dreamy, etherial sounding scale with 6 notes instead of 7.\nFormula: whole, whole, whole, whole, whole\nExample: C D E F# G# A#",
-  "\nHirajoshi: A 5 note scale that sounds very orential or Japanese.\nFormula: whole, half, whole + whole, half\nExample: C D D# G G#"
+  "\n\nWhole Tone: A unique, dreamy, etherial sounding scale with 6 notes instead of 7.\nFormula: whole, whole, whole, whole, whole\nExample: C D E F# G# A#",
+  "\n\nHirajoshi: A 5 note scale that sounds very orential or Japanese.\nFormula: whole, half, whole + whole, half\nExample: C D D# G G#"
 ];
 const scales_map: Map<string, result_maps> = new Map<string, result_maps>([
   ["major", major_scales_array],
@@ -170,14 +172,11 @@ const Default = () => {
 interface CalculatorProps {
   concept: string;
   emotion: string;
-  //to prevent updates every time it changes
-  onInvalidSelection: () => void;
 }
 //pre and pre-wrap preserves line breaks
 const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
   //retrieves value from above and matches with hash table
   if (concept === "concept_select" || emotion === "sound_select") {
-    //alert('Please select a concept and a sound!');
     return (
       <Default />
     );
@@ -188,19 +187,19 @@ const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
       case 'chords':
         //console.log(chords_map.get(emotion));
         return (
-          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 ml-12 h-fit mr-4 bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(chords_map.get(emotion))}</pre>
           </div>
         );
       case 'scales':
         return (
-          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 ml-12 mr-4 h-fit bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(scales_map.get(emotion))}</pre>
           </div>
         );
       case 'intervals':
         return (
-          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 ml-12 mr-4 h-fit bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(intervals_map.get(emotion))}</pre>
           </div>
         );
