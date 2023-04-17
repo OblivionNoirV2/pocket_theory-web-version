@@ -11,7 +11,8 @@ const MainBody = () => {
     showCalc(!calc);
     setIsFirstTime(false);
   };
-
+  const [concept, setConcept] = useState("");
+  const [emotion, setEmotion] = useState("");
   return (
     <main className='bg-slate-200/90 h-screen w-1/2 flex flex-col m-auto'>
       <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
@@ -22,16 +23,27 @@ const MainBody = () => {
         <div className=" space-y-4">
           <h1>Choose from the drop downs and
             get a list of results that match!</h1>
-          <select required name="c-sel" className="bg-white w-52
-           text-black py-2 px-4 rounded-lg z-2 "
+          <select
+            required
+            name="c-sel"
+            value={concept}
+            onChange={(e) => setConcept(e.target.value)}
+            className="bg-white w-52 text-black py-2 px-4 rounded-lg 
+            z-2"
             id='concept_select'>
             <option selected value="concept_select">Pick a theory concept</option>
             <option value="chords">chords</option>
             <option value="scales">scales</option>
             <option value="intervals">intervals</option>
           </select>
-          <select required className="bg-white w-60 text-black py-2 px-4 
-          rounded-lg"
+
+          <select
+            required
+            name="e-sel"
+            value={emotion}
+            onChange={(e) => setEmotion(e.target.value)}
+            className="bg-white w-60 text-black py-2 px-4 
+            rounded-lg"
             id='emotion_select'>
             <option selected value="sound_select">What should it sound like?</option>
             <option value="major">major</option>
@@ -39,17 +51,18 @@ const MainBody = () => {
             <option value="dissonant">dissonant</option>
             <option value="other">other</option>
           </select>
+
           <button className='block hover:bg-white px-2 py-1 rounded-md'
             onClick={handleClick}>Submit</button>
         </div>
         {/*when button is clicked, swap this out for the calculation*/}
-        {calc ? <Calculator /> :
+        {calc ? <Calculator concept={concept} emotion={emotion} /> :
           (isFirstTime ?
             <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
               Output will be here...
             </div>
             :
-            <Calculator />
+            <Calculator concept={concept} emotion={emotion} />
           )
         }
       </div>
@@ -144,13 +157,12 @@ const intervals_map = new Map([
   ["other", other_intervals_array],
 ]);
 //hell
-
-function Calculator() {
+interface CalculatorProps {
+  concept: string;
+  emotion: string;
+}
+const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
   //retrieves value from above and matches with hash table
-  const concept_select = document.getElementById('concept_select') as HTMLSelectElement;
-  const emotion_select = document.getElementById('emotion_select') as HTMLSelectElement;
-  const concept = concept_select.value;
-  const emotion = emotion_select.value;
   if (concept === 'concept_select' || emotion === 'sound_select') {
     alert('Please select a concept and a sound!');
   }
