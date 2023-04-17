@@ -3,7 +3,15 @@ import './App.css';
 
 //simple header with 66% width design
 const MainBody = () => {
-  const [btn, showBtn] = useState(false);
+  const [calc, showCalc] = useState(false);
+  const [isFirstTime, setIsFirstTime] = useState(true);
+  const handleClick = () => {
+    //needs to ONLY show the default the first time 
+    //After that, just update the calculation
+    showCalc(!calc);
+    setIsFirstTime(false);
+  };
+
   return (
     <main className='bg-slate-200/90 h-screen w-1/2 flex flex-col m-auto'>
       <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
@@ -32,15 +40,18 @@ const MainBody = () => {
             <option value="other">other</option>
           </select>
           <button className='block hover:bg-white px-2 py-1 rounded-md'
-            onClick={() => showBtn(true)}>Submit</button>
+            onClick={handleClick}>Submit</button>
         </div>
         {/*when button is clicked, swap this out for the calculation*/}
-        {btn ? <Calculator /> :
-          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
-            Output will be here...
-          </div>
+        {calc ? <Calculator /> :
+          (isFirstTime ?
+            <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+              Output will be here...
+            </div>
+            :
+            <Calculator />
+          )
         }
-
       </div>
     </main>
   );
@@ -140,7 +151,6 @@ function Calculator() {
   const emotion_select = document.getElementById('emotion_select') as HTMLSelectElement;
   const concept = concept_select.value;
   const emotion = emotion_select.value;
-  let text = "test";
   if (concept === 'concept_select' || emotion === 'sound_select') {
     alert('Please select a concept and a sound!');
   }
@@ -150,18 +160,26 @@ function Calculator() {
     switch (concept) {
       case 'chords':
         //console.log(chords_map.get(emotion));
-        break;
+        return (
+          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+            {(chords_map.get(emotion))}
+          </div>
+        );
       case 'scales':
-        break;
+        return (
+          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+            {(scales_map.get(emotion))}
+          </div>
+        );
       case 'intervals':
-        break;
+        return (
+          <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+            {(intervals_map.get(emotion))}
+          </div>
+        );
     }
   }
-  return (
-    <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
-      testing
-    </div>
-  );
+  return null;
 };
 function App() {
   return (
