@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect, Fragment } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-
+//Need to move the results box to the center at a certain screen width
 //simple header with 66% width design
 const MainBody = () => {
   const [calc, showCalc] = useState(false);
@@ -32,7 +32,6 @@ const MainBody = () => {
               setConcept(e.target.value)
             }
             }
-
             className="bg-white w-52 text-black py-2 px-4 rounded-lg 
             z-2"
             id='concept_select'>
@@ -78,8 +77,8 @@ const MainBody = () => {
 type result_maps = string | string[];
 //chords
 const diss_chords_array: string[] = [
-  "Diminished: Any chord that usually is not dissonant, with a flattened note to make it so.Tense and unstable.\nExample: C D# F#(a C minor with the 5th flattened)",
-  "Augmented: Any chord that usually is not dissonant, with a raised note to make it so.Tense and unstable.\nExample: C E G#(a C major with the 5th raised)"
+  "\nDiminished: Any chord that usually is not dissonant, with a flattened note to make it so. Tense and unstable.\nExample: C D# F#(a C minor with the 5th flattened)",
+  "\nAugmented: Any chord that usually is not dissonant, with a raised note to make it so. Tense and unstable.\nExample: C E G#(a C major with the 5th raised)"
 ];
 const other_chords_array: string[] = [
   "\nPower chords: Two note chords with a neutral, but powerful sound.\nFormula: root, perfect 5th\nExample: C G",
@@ -100,7 +99,7 @@ const chords_map: Map<string, result_maps> = new Map<string, result_maps>([
 //scales 
 const major_scales_array: string[] = [
   "\nMajor(Ionian): A simple, happy sounding scale.\nFormula: whole, whole, half, whole, whole, whole, half Example: C D E F G A B",
-  "\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\n Formula: whole, whole, whole, half, whole, whole, half Example: C D E F# G A B"
+  "\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\nFormula: whole, whole, whole, half, whole, whole, half Example: C D E F# G A B"
 ];
 const minor_scales_array: string[] = [
   "\nMinor(Aeolian): A scale that tends to sound sad and dark. Very versatile.\nFormula: whole, half, whole, whole, half, whole Example: C D D# F G G# A#",
@@ -174,6 +173,7 @@ interface CalculatorProps {
   //to prevent updates every time it changes
   onInvalidSelection: () => void;
 }
+//pre and pre-wrap preserves line breaks
 const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
   //retrieves value from above and matches with hash table
   if (concept === "concept_select" || emotion === "sound_select") {
@@ -183,26 +183,25 @@ const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
     );
   }
   else {
-    console.log(concept + ' ' + emotion);
     //pull from the map and display the results
     switch (concept) {
       case 'chords':
         //console.log(chords_map.get(emotion));
         return (
           <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
-            {(chords_map.get(emotion))}
+            <pre className='whitespace-pre-wrap'>{(chords_map.get(emotion))}</pre>
           </div>
         );
       case 'scales':
         return (
           <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
-            {(scales_map.get(emotion))}
+            <pre className='whitespace-pre-wrap'>{(scales_map.get(emotion))}</pre>
           </div>
         );
       case 'intervals':
         return (
           <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
-            {(intervals_map.get(emotion))}
+            <pre className='whitespace-pre-wrap'>{(intervals_map.get(emotion))}</pre>
           </div>
         );
     }
