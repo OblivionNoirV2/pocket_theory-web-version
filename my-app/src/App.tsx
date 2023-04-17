@@ -1,26 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 //Need to move the results box to the center at a certain screen width
 //simple header with 66% width design
 const MainBody = () => {
   const [calc, showCalc] = useState(false);
   const [isFirstTime, setIsFirstTime] = useState(true);
+  //get the window size state
+  const { width } = useWindowSize();
+  //move to the middle if the screen is small
+  //also remove the constraint of main width
+  const is_small_screen = width <= 720;
   const handleChange = () => {
     //needs to ONLY show the default the first time 
     //After that, just update the calculation
     showCalc(!calc);
     setIsFirstTime(false);
   };
+  //Manage resizing of main area with window size
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = useState({
+      width: window.innerWidth,
+    });
+    //Effect to update window size
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+        });
+      }
+      //add the EL...
+      window.addEventListener('resize', handleResize);
+      handleResize();
+      //...then remove the event listener when the component is unmounted
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowSize;
+  }
+  //defaults
   const [concept, setConcept] = useState("concept_select");
   const [emotion, setEmotion] = useState("sound_select");
   return (
-    <main className='bg-slate-200/90 h-screen w-1/2 flex flex-col m-auto'>
+    <main className='bg-slate-200/90 h-screen lg:w-1/2 sm:w-screen flex flex-col lg:m-auto sm:mr-10'>
       <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
       text-4xl">
         Quick Music Theory Reference
       </div>
       <div className="flex-grow flex ml-16 mt-16">
-        <div className=" space-y-4">
+        <div className="space-y-4">
           <h1>Choose from the drop downs and
             get a list of results that match!</h1>
           <select
@@ -32,8 +59,7 @@ const MainBody = () => {
               setConcept(e.target.value)
             }
             }
-            className="bg-white w-52 text-black py-2 px-4 rounded-lg 
-            z-2"
+            className="bg-white w-52 text-black py-2 px-4 rounded-lg"
             id='concept_select'>
             <option defaultValue="concept_select">Pick a theory concept</option>
             <option value="chords">chords</option>
@@ -59,17 +85,25 @@ const MainBody = () => {
             <option value="dissonant">dissonant</option>
             <option value="other">other</option>
           </select>
-
+          {/*render here in the middle for mobile*/}
+          {is_small_screen && (calc ? <Calculator concept={concept} emotion={emotion} /> :
+            (isFirstTime ?
+              <Default />
+              :
+              <Calculator concept={concept} emotion={emotion} />
+            )
+          )}
         </div>
-        {/*when button is clicked, swap this out for the calculation*/}
-        {calc ? <Calculator concept={concept} emotion={emotion} /> :
+        {/*and here to the right for desktop*/}
+        {!is_small_screen && (calc ? <Calculator concept={concept} emotion={emotion} /> :
           (isFirstTime ?
             <Default />
             :
             <Calculator concept={concept} emotion={emotion} />
           )
-        }
+        )}
       </div>
+      {/*when button is clicked, swap this out for the calculation*/}
     </main>
   );
 };
@@ -164,7 +198,8 @@ const intervals_map = new Map([
 ]);
 const Default = () => {
   return (
-    <div className="max-w-lg pb-3 ml-12 mr-auto h-fit bg-white border-4 border-black/80 rounded-lg">
+    <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
+           bg-white border-4 border-black/80 rounded-lg">
       Output will be here...
     </div>
   );
@@ -187,19 +222,22 @@ const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
       case 'chords':
         //console.log(chords_map.get(emotion));
         return (
-          <div className="max-w-lg pb-3 ml-12 h-fit mr-4 bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
+           bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(chords_map.get(emotion))}</pre>
           </div>
         );
       case 'scales':
         return (
-          <div className="max-w-lg pb-3 ml-12 mr-4 h-fit bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 md:ml-12 h-fit md:mx-auto xl:mr-4
+           bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(scales_map.get(emotion))}</pre>
           </div>
         );
       case 'intervals':
         return (
-          <div className="max-w-lg pb-3 ml-12 mr-4 h-fit bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
+           bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(intervals_map.get(emotion))}</pre>
           </div>
         );
