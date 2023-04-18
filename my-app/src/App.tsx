@@ -133,14 +133,14 @@ const chords_map: Map<string, result_maps> = new Map<string, result_maps>([
 
 //scales 
 const major_scales_array: string[] = [
-  "\nMajor(Ionian): A simple, happy sounding scale.\nFormula: whole, whole, half, whole, whole, whole, half Example: C D E F G A B",
-  "\n\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\nFormula: whole, whole, whole, half, whole, whole, half Example: C D E F# G A B"
+  "\nMajor(Ionian): A simple, happy sounding scale.\nFormula: whole, whole, half, whole, whole, whole, half\nExample: C D E F G A B",
+  "\n\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\nFormula: whole, whole, whole, half, whole, whole, half\nExample: C D E F# G A B"
 ];
 const minor_scales_array: string[] = [
   "\nMinor(Aeolian): A scale that tends to sound sad and dark. Very versatile.\nFormula: whole, half, whole, whole, half, whole Example: C D D# F G G# A#",
   "\n\nMelodic Minor: A slightly brighter minor scale with the unique quality of sometimes having a different formula ascending and descending. The choice is up to you.\nFormula, ascending: whole, half, whole, whole, whole, whole\nFormula, descending(same as Aeolian): whole, half, whole, whole, half, whole\nExample: C D D# F G A B / A# G# G F D# D C",
-  "\n\nHarmonic Minor: The Aeolian scale with a raised 7th, which creates a slight sense of darkness and unease.Very Classical sound.\nFormula: whole, half, whole, whole, half, whole + half Example: C D D# F G G# B",
-  "\n\nPhrygian: Not to be confused with the Phrygian Dominant. Has a very dark, epic quality to it.\nFormula: half, whole, whole, whole, half, whole Example: C C# D# F G G# A#"
+  "\n\nHarmonic Minor: The Aeolian scale with a raised 7th, which creates a slight sense of darkness and unease. Very Classical sound.\nFormula: whole, half, whole, whole, half, whole + half Example: C D D# F G G# B",
+  "\n\nPhrygian: Not to be confused with the Phrygian Dominant. Has a very dark, epic quality to it.\nFormula: half, whole, whole, whole, half, whole\nExample: C C# D# F G G# A#"
 ];
 const diss_scales_array: string[] = [
   "\nLocrian: A tense, very dark scale that can sound unstable or scary.\nFormula: half, whole, whole, half, whole, whole\nExample: C C# D# F F# G# A#",
@@ -187,7 +187,7 @@ const diss_intervals_array: string[] = [
   "\nDim 7th: 9 semitones"
 ];
 const other_intervals_array: string[] = [
-  "\nerfect 4th: 5 semitones",
+  "\nPerfect 4th: 5 semitones",
   "\nPerfect 5th: 7 semitones",
   "\nOctave: 12 semitones"
 ];
