@@ -9,7 +9,7 @@ const MainBody = () => {
   const { width } = useWindowSize();
   //move to the middle if the screen is small
   //also remove the constraint of main width
-  const is_small_screen = width <= 720;
+  const is_small_screen = width <= 900;
   const handleChange = () => {
     //needs to ONLY show the default the first time 
     //After that, just update the calculation
@@ -41,15 +41,16 @@ const MainBody = () => {
   const [concept, setConcept] = useState("concept_select");
   const [emotion, setEmotion] = useState("sound_select");
   return (
-    <main className='bg-slate-200/90 h-auto pb-96 rounded-bl-xl rounded-br-xl lg:w-1/2 sm:w-screen 
-    flex flex-col lg:m-auto sm:mr-10'>
+    <main className='bg-slate-200/90 h-auto pb-96 rounded-bl-xl 
+    rounded-br-xl md:w-1/2 sm:w-screen 
+    flex flex-col md:m-auto'>
       <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
       text-4xl">
         Quick Music Theory Reference
       </div>
-      <div className="flex-grow flex ml-16 mt-16">
-        <div className="space-y-4">
-          <h1>Choose from the drop downs and
+      <div className="flex-grow flex ml-12 lg:ml-16 mt-16">
+        <div className="space-y-4 ">
+          <h1 className='pr-4'>Choose from the drop downs and
             get a list of results that match!</h1>
           <select
             required
@@ -60,7 +61,7 @@ const MainBody = () => {
               setConcept(e.target.value)
             }
             }
-            className="bg-white w-52 text-black py-2 px-4 rounded-lg"
+            className="bg-white text-black py-2 px-2 mr-2 rounded-lg"
             id='concept_select'>
             <option defaultValue="concept_select">Pick a theory concept</option>
             <option value="chords">chords</option>
@@ -77,7 +78,7 @@ const MainBody = () => {
               setEmotion(e.target.value)
             }
             }
-            className="bg-white w-60 text-black py-2 px-4 
+            className="bg-white text-black py-2 px-2 mr-2 
             rounded-lg"
             id='emotion_select'>
             <option defaultValue="sound_select">What should it sound like?</option>
@@ -199,7 +200,7 @@ const intervals_map = new Map([
 ]);
 const Default = () => {
   return (
-    <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
+    <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
            bg-white border-4 border-black/80 rounded-lg">
       Output will be here...
     </div>
@@ -223,21 +224,21 @@ const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
       case 'chords':
         //console.log(chords_map.get(emotion));
         return (
-          <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
+          <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
            bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(chords_map.get(emotion))}</pre>
           </div>
         );
       case 'scales':
         return (
-          <div className="max-w-lg pb-3 md:ml-12 h-fit md:mx-auto xl:mr-4
+          <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
            bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(scales_map.get(emotion))}</pre>
           </div>
         );
       case 'intervals':
         return (
-          <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
+          <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
            bg-white border-4 border-black/80 rounded-lg">
             <pre className='whitespace-pre-wrap'>{(intervals_map.get(emotion))}</pre>
           </div>
