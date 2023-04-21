@@ -41,8 +41,8 @@ const MainBody = () => {
   const [concept, setConcept] = useState("concept_select");
   const [emotion, setEmotion] = useState("sound_select");
   return (
-    <main className='bg-slate-200/90 h-auto pb-96 rounded-bl-xl 
-    rounded-br-xl md:w-1/2 sm:w-screen 
+    <main className='bg-slate-200/90 h-auto pb-96 rounded-bl-2xl 
+    rounded-br-2xl md:w-1/2 sm:w-screen 
     flex flex-col md:m-auto'>
       <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
       text-4xl">
