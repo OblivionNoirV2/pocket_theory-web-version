@@ -9,7 +9,7 @@ const MainBody = () => {
   const { width } = useWindowSize();
   //move to the middle if the screen is small
   //also remove the constraint of main width
-  const is_small_screen = width <= 720;
+  const is_small_screen = width <= 900;
   const handleChange = () => {
     //needs to ONLY show the default the first time 
     //After that, just update the calculation
@@ -41,14 +41,17 @@ const MainBody = () => {
   const [concept, setConcept] = useState("concept_select");
   const [emotion, setEmotion] = useState("sound_select");
   return (
-    <main className='bg-slate-200/90 h-screen lg:w-1/2 sm:w-screen flex flex-col lg:m-auto sm:mr-10'>
-      <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
-      text-4xl">
+    <main className='main-container h-auto pb-96 mt-4 rounded-2xl 
+    md:w-1/2 sm:w-screen 
+    flex flex-col md:mx-auto'>
+      <div className="bg-slate-500 text-white top-bar w-full 
+      py-2 max-h-60 text-center 
+      text-4xl rounded-tr-2xl rounded-tl-2xl">
         Quick Music Theory Reference
       </div>
-      <div className="flex-grow flex ml-16 mt-16">
-        <div className="space-y-4">
-          <h1>Choose from the drop downs and
+      <div className="flex-grow flex ml-12 lg:ml-16 mt-16">
+        <div className="space-y-4 ">
+          <h1 className='pr-4 text-white'>Choose from the drop downs and
             get a list of results that match!</h1>
           <select
             required
@@ -59,7 +62,7 @@ const MainBody = () => {
               setConcept(e.target.value)
             }
             }
-            className="bg-white w-52 text-black py-2 px-4 rounded-lg"
+            className="bg-white text-black py-2 px-2 mr-2 rounded-lg"
             id='concept_select'>
             <option defaultValue="concept_select">Pick a theory concept</option>
             <option value="chords">chords</option>
@@ -76,7 +79,7 @@ const MainBody = () => {
               setEmotion(e.target.value)
             }
             }
-            className="bg-white w-60 text-black py-2 px-4 
+            className="bg-white text-black py-2 px-2 mr-2 
             rounded-lg"
             id='emotion_select'>
             <option defaultValue="sound_select">What should it sound like?</option>
@@ -132,14 +135,14 @@ const chords_map: Map<string, result_maps> = new Map<string, result_maps>([
 
 //scales 
 const major_scales_array: string[] = [
-  "\nMajor(Ionian): A simple, happy sounding scale.\nFormula: whole, whole, half, whole, whole, whole, half Example: C D E F G A B",
-  "\n\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\nFormula: whole, whole, whole, half, whole, whole, half Example: C D E F# G A B"
+  "\nMajor(Ionian): A simple, happy sounding scale.\nFormula: whole, whole, half, whole, whole, whole, half\nExample: C D E F G A B",
+  "\n\nLydian: A happy sounding scale that is similar to major, but with a raised 4th that can give it a unique, mystical quality.\nFormula: whole, whole, whole, half, whole, whole, half\nExample: C D E F# G A B"
 ];
 const minor_scales_array: string[] = [
   "\nMinor(Aeolian): A scale that tends to sound sad and dark. Very versatile.\nFormula: whole, half, whole, whole, half, whole Example: C D D# F G G# A#",
   "\n\nMelodic Minor: A slightly brighter minor scale with the unique quality of sometimes having a different formula ascending and descending. The choice is up to you.\nFormula, ascending: whole, half, whole, whole, whole, whole\nFormula, descending(same as Aeolian): whole, half, whole, whole, half, whole\nExample: C D D# F G A B / A# G# G F D# D C",
-  "\n\nHarmonic Minor: The Aeolian scale with a raised 7th, which creates a slight sense of darkness and unease.Very Classical sound.\nFormula: whole, half, whole, whole, half, whole + half Example: C D D# F G G# B",
-  "\n\nPhrygian: Not to be confused with the Phrygian Dominant. Has a very dark, epic quality to it.\nFormula: half, whole, whole, whole, half, whole Example: C C# D# F G G# A#"
+  "\n\nHarmonic Minor: The Aeolian scale with a raised 7th, which creates a slight sense of darkness and unease. Very Classical sound.\nFormula: whole, half, whole, whole, half, whole + half Example: C D D# F G G# B",
+  "\n\nPhrygian: Not to be confused with the Phrygian Dominant. Has a very dark, epic quality to it.\nFormula: half, whole, whole, whole, half, whole\nExample: C C# D# F G G# A#"
 ];
 const diss_scales_array: string[] = [
   "\nLocrian: A tense, very dark scale that can sound unstable or scary.\nFormula: half, whole, whole, half, whole, whole\nExample: C C# D# F F# G# A#",
@@ -186,7 +189,7 @@ const diss_intervals_array: string[] = [
   "\nDim 7th: 9 semitones"
 ];
 const other_intervals_array: string[] = [
-  "\nerfect 4th: 5 semitones",
+  "\nPerfect 4th: 5 semitones",
   "\nPerfect 5th: 7 semitones",
   "\nOctave: 12 semitones"
 ];
@@ -198,8 +201,9 @@ const intervals_map = new Map([
 ]);
 const Default = () => {
   return (
-    <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
-           bg-white border-4 border-black/80 rounded-lg">
+    <div className="max-w-lg pb-3 px-8  mr-10 ml-0 lg:ml-4 sm:mr-4 
+    h-fit 
+           bg-white border-[.1rem] border-black/80 rounded-lg">
       Output will be here...
     </div>
   );
@@ -222,22 +226,22 @@ const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
       case 'chords':
         //console.log(chords_map.get(emotion));
         return (
-          <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
-           bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
+           bg-white border-4 border-black/80 rounded-lg px-8">
             <pre className='whitespace-pre-wrap'>{(chords_map.get(emotion))}</pre>
           </div>
         );
       case 'scales':
         return (
-          <div className="max-w-lg pb-3 md:ml-12 h-fit md:mx-auto xl:mr-4
-           bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
+           bg-white border-4 border-black/80 rounded-lg px-8">
             <pre className='whitespace-pre-wrap'>{(scales_map.get(emotion))}</pre>
           </div>
         );
       case 'intervals':
         return (
-          <div className="max-w-lg pb-3 md:ml-12 h-fit sm:mx-auto md:mr-4
-           bg-white border-4 border-black/80 rounded-lg">
+          <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
+           bg-white border-4 border-black/80 rounded-lg px-8">
             <pre className='whitespace-pre-wrap'>{(intervals_map.get(emotion))}</pre>
           </div>
         );
