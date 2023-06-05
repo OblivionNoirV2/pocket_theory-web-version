@@ -41,16 +41,17 @@ const MainBody = () => {
   const [concept, setConcept] = useState("concept_select");
   const [emotion, setEmotion] = useState("sound_select");
   return (
-    <main className='bg-slate-200/90 h-auto pb-96 rounded-bl-2xl 
-    rounded-br-2xl md:w-1/2 sm:w-screen 
-    flex flex-col md:m-auto'>
-      <div className="bg-slate-300 w-full py-2 max-h-60 text-center 
-      text-4xl">
+    <main className='main-container h-auto pb-96 mt-4 rounded-2xl 
+    md:w-1/2 sm:w-screen 
+    flex flex-col md:mx-auto'>
+      <div className="bg-slate-500 text-white top-bar w-full 
+      py-2 max-h-60 text-center 
+      text-4xl rounded-tr-2xl rounded-tl-2xl">
         Quick Music Theory Reference
       </div>
       <div className="flex-grow flex ml-12 lg:ml-16 mt-16">
         <div className="space-y-4 ">
-          <h1 className='pr-4'>Choose from the drop downs and
+          <h1 className='pr-4 text-white'>Choose from the drop downs and
             get a list of results that match!</h1>
           <select
             required
@@ -200,8 +201,9 @@ const intervals_map = new Map([
 ]);
 const Default = () => {
   return (
-    <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
-           bg-white border-4 border-black/80 rounded-lg">
+    <div className="max-w-lg pb-3 px-8  mr-10 ml-0 lg:ml-4 sm:mr-4 
+    h-fit 
+           bg-white border-[.1rem] border-black/80 rounded-lg">
       Output will be here...
     </div>
   );
@@ -225,21 +227,21 @@ const Calculator: React.FC<CalculatorProps> = ({ concept, emotion }) => {
         //console.log(chords_map.get(emotion));
         return (
           <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
-           bg-white border-4 border-black/80 rounded-lg">
+           bg-white border-4 border-black/80 rounded-lg px-8">
             <pre className='whitespace-pre-wrap'>{(chords_map.get(emotion))}</pre>
           </div>
         );
       case 'scales':
         return (
           <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
-           bg-white border-4 border-black/80 rounded-lg">
+           bg-white border-4 border-black/80 rounded-lg px-8">
             <pre className='whitespace-pre-wrap'>{(scales_map.get(emotion))}</pre>
           </div>
         );
       case 'intervals':
         return (
           <div className="max-w-lg pb-3 mr-10 ml-0 lg:ml-4 sm:mr-4 h-fit 
-           bg-white border-4 border-black/80 rounded-lg">
+           bg-white border-4 border-black/80 rounded-lg px-8">
             <pre className='whitespace-pre-wrap'>{(intervals_map.get(emotion))}</pre>
           </div>
         );

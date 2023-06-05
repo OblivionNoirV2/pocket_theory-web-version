@@ -1,10 +1,19 @@
 body {
-  background-image: url("images/bg_upscaled.png");
-  background-repeat: no-repeat;
+  background-image: url("images/musicbg.png");
+  background-repeat: repeat-y;
   background-size: cover;
 
 }
 
 html {
   overflow-y: auto;
+  font-family: 'Raleway', sans-serif;
+}
+
+.main-container {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
 }
